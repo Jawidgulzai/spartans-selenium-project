@@ -7,7 +7,10 @@ public class HandleBrowser {
 
         ChromeDriver chromeDriver = new ChromeDriver();
         chromeDriver.get("https://google.com");
-        chromeDriver.close();
+        chromeDriver.manage().window().minimize();
+        String title = chromeDriver.getTitle();
+        System.out.println(title);
+        chromeDriver.quit();
 
     }
 }

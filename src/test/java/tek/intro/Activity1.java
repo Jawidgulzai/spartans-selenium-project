@@ -7,6 +7,12 @@ public class Activity1 {
 
         ChromeDriver chromeDriver = new ChromeDriver();
         chromeDriver.get("https:/facebook.com");
+        chromeDriver.manage().window().maximize();
+        String title = chromeDriver.getTitle();
+        System.out.println(title);
+
+        chromeDriver.quit();
+
 
     }
 }
