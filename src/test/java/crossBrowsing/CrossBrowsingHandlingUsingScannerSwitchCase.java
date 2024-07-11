@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.Scanner;
 
-public class CrossBrowsingHandlingUsingScannerSwithCase {
+public class CrossBrowsingHandlingUsingScannerSwitchCase {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
