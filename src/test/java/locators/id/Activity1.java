@@ -13,9 +13,9 @@ public class Activity1 {
         driver.get("https://tek-retail-ui.azurewebsites.net/");
         driver.manage().window().maximize();
 
-        By searchSignInLocator = By.linkText("Sign in");
-        WebElement searchSignInElement = driver.findElement(searchSignInLocator);
-        searchSignInElement.click();
+        By signInLocator = By.linkText("Sign in");
+        WebElement signInElement = driver.findElement(signInLocator);
+        signInElement.click();
 
         By emailInputLocator = By.id("email");
         WebElement emailInputElement = driver.findElement(emailInputLocator);
