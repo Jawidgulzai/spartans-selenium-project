@@ -1,9 +1,7 @@
 package crossBrowsing;
 
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
+
 
 public class CrossBrowsing {
     public static void main(String[] args) {
