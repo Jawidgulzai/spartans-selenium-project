@@ -29,7 +29,7 @@ public class Activity1 {
         WebElement loginElement = driver.findElement(loginBtnLocator);
         loginElement.click();
 
-       // driver.quit();
+       driver.quit();
 
     }
 }
