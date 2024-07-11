@@ -30,6 +30,5 @@ public class Activity1 {
         loginElement.click();
 
        driver.quit();
-
     }
 }
