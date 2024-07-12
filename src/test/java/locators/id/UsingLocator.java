@@ -15,7 +15,6 @@ public class UsingLocator {
 
         By searchInputLocator = By.id("searchInput");
         WebElement searchInputElement = driver.findElement(searchInputLocator);
-
         searchInputElement.sendKeys("TV");
 
         By searchBtnLocator = By.id("searchInput");
@@ -23,8 +22,5 @@ public class UsingLocator {
         searchBtnElement.click();
 
         driver.quit();
-
-
-
     }
 }

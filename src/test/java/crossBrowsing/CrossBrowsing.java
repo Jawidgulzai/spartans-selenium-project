@@ -13,6 +13,8 @@ public class CrossBrowsing {
         EdgeDriver edgeDriver = new EdgeDriver();
         edgeDriver.get("https://google.com");
         edgeDriver.manage().window().maximize();
+        String url = edgeDriver.getCurrentUrl();
+        System.out.println(url);
         String title = edgeDriver.getTitle();
         System.out.println(title);
         edgeDriver.quit();
