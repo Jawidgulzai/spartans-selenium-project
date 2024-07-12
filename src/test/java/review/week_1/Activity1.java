@@ -11,7 +11,7 @@ public class Activity1 {
         /*
         In the Retail app, click on sign in then click on Create new Account,
         then fill up the form and sign up. Expectation is to Create a new Account.
-        Once an account created makes sure profile picture is displayed. (isDisplayed)
+        Once an account is created, make sure profile picture is displayed. (isDisplayed)
         And print result of isDisplayed method.
         Push to your repository
          */
@@ -35,7 +35,7 @@ public class Activity1 {
 
         By inputEmailLocator = By.id("emailInput");
         WebElement inputEmailElement = driver.findElement(inputEmailLocator);
-        inputEmailElement.sendKeys("Jawid555@gmail.com");
+        inputEmailElement.sendKeys("Jawid444@gmail.com");
 
         By inputPasswordLocator = By.id("passwordInput");
         WebElement inputPasswordElement = driver.findElement(inputPasswordLocator);
@@ -52,7 +52,8 @@ public class Activity1 {
         Thread.sleep(3000);
         By profileImageLocator = By.id("profileImage");
         WebElement profileImageElement = driver.findElement(profileImageLocator);
-        profileImageElement.isDisplayed();
+        boolean profile = profileImageElement.isDisplayed();
+        System.out.println(profile);
 
         driver.quit();
 
