@@ -49,6 +49,7 @@ public class Activity1 {
         WebElement signupBtnElement = driver.findElement(signupBtnLocator);
         signupBtnElement.click();
 
+        Thread.sleep(3000);
         By profileImageLocator = By.id("profileImage");
         WebElement profileImageElement = driver.findElement(profileImageLocator);
         profileImageElement.isDisplayed();
