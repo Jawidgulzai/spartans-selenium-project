@@ -5,35 +5,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Activity1 {
+public class Activity {
+
     public static void main(String[] args) throws InterruptedException {
-
-        /*
-        In the Retail app, click on sign in then click on Create new Account,
-        then fill up the form and sign up. Expectation is to Create a new Account.
-        Once an account is created, make sure profile picture is displayed. (isDisplayed)
-        And print result of isDisplayed method.
-        Push to your repository
-         */
-
         WebDriver driver = new ChromeDriver();
-        Thread.sleep(3000);
-        driver.get("https://tek-retail-ui.azurewebsites.net/");
         driver.manage().window().maximize();
+        driver.get("https://retail.tekschool-students.com/");
 
-        By signInLocator = By.linkText("Sign in");
+        By signInLocator = By.id("signinLink");
         WebElement signInElement = driver.findElement(signInLocator);
         signInElement.click();
 
-        By createNewAccountLocator = By.linkText("Create New Account");
-        WebElement createNewAccountElement = driver.findElement(createNewAccountLocator);
-        createNewAccountElement.click();
+        By newAccountLocator = By.id("newAccountBtn");
+        WebElement newAccountElement = driver.findElement(newAccountLocator);
+        newAccountElement.click();
 
         By nameLocator = By.id("nameInput");
         WebElement nameElement = driver.findElement(nameLocator);
-        nameElement.sendKeys("Jawid");
+        nameElement.sendKeys("Mohammad");
 
-        String emailPrefix = "jawid_spartans";
+        String emailPrefix = "mohammad_spartans";
         int number = (int) (Math.random() * 100);
         String randomEmail = emailPrefix + number + "@gmail.com";
 
@@ -41,21 +32,23 @@ public class Activity1 {
         WebElement emailElement = driver.findElement(emailLocator);
         emailElement.sendKeys(randomEmail);
 
-        By passwordLocator = By.id("passwordInput");
-        WebElement passwordElement = driver.findElement(passwordLocator);
-        passwordElement.sendKeys("Jawid4321@$$");
+        By passwordLocator =By.id("passwordInput");
+        WebElement passwordElement =driver.findElement(passwordLocator);
+        passwordElement.sendKeys("Password@123");
 
         By confirmPasswordLocator = By.id("confirmPasswordInput");
         WebElement confirmPasswordElement = driver.findElement(confirmPasswordLocator);
-        confirmPasswordElement.sendKeys("Jawid4321@$$");
+        confirmPasswordElement.sendKeys("Password@123");
 
         By signUpLocator = By.id("signupBtn");
         WebElement signUpElement = driver.findElement(signUpLocator);
         signUpElement.click();
 
         Thread.sleep(1000);
+
         By profileLocator = By.id("profileImage");
         WebElement profileElement = driver.findElement(profileLocator);
+
         boolean isProfileDisplayed = profileElement.isDisplayed();
 
         if (isProfileDisplayed){
