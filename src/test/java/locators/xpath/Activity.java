@@ -13,11 +13,9 @@ public class Activity {
         WebDriver driver = new ChromeDriver();
         driver.get("https://tek-retail-ui.azurewebsites.net/");
         driver.manage().window().maximize();
-
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 
-        Thread.sleep(3000);
         driver.findElement(By.xpath("//p[text()='Video Games']")).click();
         driver.findElement(By.xpath("//img[@alt='PlayStation 5 Console']")).click();
         driver.findElement(By.xpath("//button[@class ='product__btn']")).click();
