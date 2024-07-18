@@ -19,12 +19,12 @@ public class TekRetailAccount {
         driver.findElement(By.linkText("Sign in")).click();
         driver.findElement(By.id("newAccountBtn")).click();
         driver.findElement(By.id("nameInput")).sendKeys("Jawid");
-        String emailPrefix = "Jawid_spartans";
+        String emailPrefix = "jawid_g";
         int number = (int) (Math.random() * 100);
         String randomEmail = emailPrefix + number + "@gmail.com";
         driver.findElement(By.id("emailInput")).sendKeys(randomEmail);
-        driver.findElement(By.id("passwordInput")).sendKeys("Jawid1212$");
-        driver.findElement(By.id("confirmPasswordInput")).sendKeys("Jawid1212$");
+        driver.findElement(By.id("passwordInput")).sendKeys("Jawid123$");
+        driver.findElement(By.id("confirmPasswordInput")).sendKeys("Jawid123$");
         driver.findElement(By.id("signupBtn")).click();
         Thread.sleep(3000);
         boolean isProfileImageDisplayed = driver.findElement(By.id("profileImage")).isDisplayed();
@@ -34,6 +34,7 @@ public class TekRetailAccount {
           }else {
               System.out.println("Test failed and account has not been created successfully");
           }
-          driver.quit();
+
+          //driver.quit();
     }
 }

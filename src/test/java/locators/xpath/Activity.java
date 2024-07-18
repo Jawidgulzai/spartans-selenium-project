@@ -3,8 +3,6 @@ package locators.xpath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class Activity {
@@ -21,7 +19,6 @@ public class Activity {
         driver.findElement(By.xpath("//button[@class ='product__btn']")).click();
 
         driver.quit();
-
 
     }
 }
