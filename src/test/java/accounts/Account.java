@@ -21,7 +21,7 @@ public class Account {
             System.out.println("Sign in button is disable");
         }
         driver.findElement(By.linkText("Sign in")).click();
-        driver.findElement(By.id("email")).sendKeys("jawid_g66@gmail.com");
+        driver.findElement(By.id("email")).sendKeys("jawid_g9@gmail.com");
         driver.findElement(By.id("password")).sendKeys("Jawid123$");
         driver.findElement(By.id("loginBtn")).click();
         String text2 = driver.findElement(By.xpath("/html/body/div/div[1]/div[1]/div[2]/a")).getText();

@@ -1,4 +1,4 @@
-package activities;
+package practicePackage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,9 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.Random;
-
 
 public class Activity1 {
 
@@ -30,7 +30,7 @@ public class Activity1 {
             wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText("Sign"))).click();
 
             // Enter email and password
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email"))).sendKeys("jawid_g66@gmail.com");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email"))).sendKeys("jawid76@gmail.com");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password"))).sendKeys("Jawid123$");
 
             // Click on the login button
@@ -70,9 +70,9 @@ public class Activity1 {
             System.out.println(toastText);
 
             // Generate random passwords for newPassword and confirmNewPassword fields
-            String previousPassword = "Jawid123$"; // Replace with actual previous password logic if needed
-            String newPassword = generateRandomPassword();
-            String confirmNewPassword = newPassword;
+            String previousPassword = generateRandomPassword();  // Generate a new previous password for testing
+            String newPassword = generateRandomPassword();      // Generate a new random password
+            String confirmNewPassword = newPassword;            // Confirm the new password
 
             // Enter generated passwords into the respective fields
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("previousPasswordInput"))).sendKeys(previousPassword);
@@ -99,42 +99,25 @@ public class Activity1 {
             // Handle exception as per your application's requirements
         } finally {
             // Quit WebDriver instance
-            //driver.quit();
+            driver.quit();
         }
     }
 
-    // Method to generate a random password meeting specific criteria
+    // Method to generate a random password
     private static String generateRandomPassword() {
         String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
         String numbers = "0123456789";
         String specialChars = "!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?";
+        String allowedChars = upperCaseLetters + lowerCaseLetters + numbers + specialChars;
 
         Random random = new Random();
         StringBuilder sb = new StringBuilder(8); // Length of the generated password
-
-        // Ensure the password contains at least one uppercase letter, one lowercase letter, one digit, and one special character
-        sb.append(upperCaseLetters.charAt(random.nextInt(upperCaseLetters.length())));
-        sb.append(lowerCaseLetters.charAt(random.nextInt(lowerCaseLetters.length())));
-        sb.append(numbers.charAt(random.nextInt(numbers.length())));
-        sb.append(specialChars.charAt(random.nextInt(specialChars.length())));
-
-        // Fill the rest of the password with random characters
-        for (int i = 4; i < 8; i++) {
-            String randomChars = upperCaseLetters + lowerCaseLetters + numbers + specialChars;
-            sb.append(randomChars.charAt(random.nextInt(randomChars.length())));
+        for (int i = 0; i < 8; i++) {
+            int randomIndex = random.nextInt(allowedChars.length());
+            sb.append(allowedChars.charAt(randomIndex));
         }
-
-        // Shuffle the generated password to ensure randomness
-        String password = sb.toString();
-        char[] passwordArray = password.toCharArray();
-        for (int i = 0; i < passwordArray.length; i++) {
-            int randomIndex = random.nextInt(passwordArray.length);
-            char temp = passwordArray[i];
-            passwordArray[i] = passwordArray[randomIndex];
-            passwordArray[randomIndex] = temp;
-        }
-        return new String(passwordArray);
+        return sb.toString();
     }
 
     // Method to generate a random phone number

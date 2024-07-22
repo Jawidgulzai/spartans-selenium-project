@@ -38,7 +38,7 @@ public class ExampleOfSynchro {
         String emailText = driver.findElement(By.cssSelector("#accountInformation > div.account__information-detail-wrapper " +
                 "> div > h1.account__information-email")).getText();
         System.out.println(emailText);
-        driver.quit();
+        //driver.quit();
 
     }
 }

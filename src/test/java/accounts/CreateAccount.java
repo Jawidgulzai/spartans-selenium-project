@@ -74,6 +74,6 @@ public class CreateAccount {
         } else {
             System.out.println("User name is not displayed " + false);
         }
-        driver.quit();
+        //driver.quit();
     }
 }

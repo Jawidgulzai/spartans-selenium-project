@@ -1,4 +1,4 @@
-package activities;
+package accounts;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,8 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.Random;
 
-
-public class Activity1 {
+public class PasswordChangeAutomation {
 
     public static void main(String[] args) {
         // Initialize WebDriver (ChromeDriver in this case)
@@ -26,15 +25,43 @@ public class Activity1 {
             // Initialize WebDriverWait
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
+            // Check if "Sign in" link is enabled
+            boolean signInLinkIsEnabled = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Sign in"))).isEnabled();
+            if (signInLinkIsEnabled){
+                System.out.println("Sign in button is enabled");
+            } else {
+                System.out.println("Sign in button is disabled");
+            }
+
             // Click on "Sign in" link
             wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText("Sign"))).click();
 
             // Enter email and password
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email"))).sendKeys("jawid_g66@gmail.com");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email"))).sendKeys("jawid_g9@gmail.com");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password"))).sendKeys("Jawid123$");
 
             // Click on the login button
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='loginBtn']"))).click();
+
+            // Verify TEKSchool logo text
+            String titleText = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'TEK')]"))).getText();
+            System.out.println("Actual TekSchool logo is : " + titleText);
+
+            // Check if "Account" button is enabled
+            boolean accountBtnIsEnabled = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Account"))).isEnabled();
+            if (accountBtnIsEnabled){
+                System.out.println("Account button is enabled");
+            } else {
+                System.out.println("Account button is disabled");
+            }
+
+            // Check if "Orders" button is enabled
+            boolean orderBtnIsEnabled = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Orders"))).isEnabled();
+            if (orderBtnIsEnabled){
+                System.out.println("Order button is enabled");
+            } else {
+                System.out.println("Order button is disabled");
+            }
 
             // Click on profile button
             wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".top-nav__btn[href='/profile']"))).click();
@@ -69,30 +96,34 @@ public class Activity1 {
             String toastText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='root']/div[2]"))).getText();
             System.out.println(toastText);
 
-            // Generate random passwords for newPassword and confirmNewPassword fields
-            String previousPassword = "Jawid123$"; // Replace with actual previous password logic if needed
-            String newPassword = generateRandomPassword();
-            String confirmNewPassword = newPassword;
+            // Generate random passwords for previousPassword, newPassword, and confirmPassword fields
+            String previousPassword = generateRandomPassword("Jawid");
+            String newPassword = generateRandomPassword("Jawid-");
+            String confirmNewPassword = generateRandomPassword("Jawid-");
 
             // Enter generated passwords into the respective fields
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("previousPasswordInput"))).sendKeys(previousPassword);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("newPasswordInput"))).sendKeys(newPassword);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("confirmPasswordInput"))).sendKeys(confirmNewPassword);
 
+            if (!newPassword.equals(confirmNewPassword)) {
+                System.out.println("New Password and Confirm Password do not match!");
+                return; // Exit the method if passwords do not match
+            }
+
             // Click on Change Password button
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Change Password']"))).click();
 
-            // Check if confirmation message popup is displayed after changing the password
             boolean confirmationPopUpMessageIsDisplayed2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='root']/div[2]"))).isDisplayed();
             if (confirmationPopUpMessageIsDisplayed2){
                 System.out.println("Confirmation message is displayed");
-            } else {
+            }else {
                 System.out.println("Confirmation message is not displayed");
             }
 
-            // Get and print toast message
             String toastText2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='root']/div[2]"))).getText();
-            System.out.println("Toast message after password change: " + toastText2);
+            System.out.println(toastText2);
+
 
         } catch (Exception e) {
             System.err.println("Error occurred: " + e.getMessage());
@@ -103,38 +134,11 @@ public class Activity1 {
         }
     }
 
-    // Method to generate a random password meeting specific criteria
-    private static String generateRandomPassword() {
-        String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
-        String numbers = "0123456789";
-        String specialChars = "!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?";
-
+    // Method to generate a random password with a given prefix
+    private static String generateRandomPassword(String prefix) {
         Random random = new Random();
-        StringBuilder sb = new StringBuilder(8); // Length of the generated password
-
-        // Ensure the password contains at least one uppercase letter, one lowercase letter, one digit, and one special character
-        sb.append(upperCaseLetters.charAt(random.nextInt(upperCaseLetters.length())));
-        sb.append(lowerCaseLetters.charAt(random.nextInt(lowerCaseLetters.length())));
-        sb.append(numbers.charAt(random.nextInt(numbers.length())));
-        sb.append(specialChars.charAt(random.nextInt(specialChars.length())));
-
-        // Fill the rest of the password with random characters
-        for (int i = 4; i < 8; i++) {
-            String randomChars = upperCaseLetters + lowerCaseLetters + numbers + specialChars;
-            sb.append(randomChars.charAt(random.nextInt(randomChars.length())));
-        }
-
-        // Shuffle the generated password to ensure randomness
-        String password = sb.toString();
-        char[] passwordArray = password.toCharArray();
-        for (int i = 0; i < passwordArray.length; i++) {
-            int randomIndex = random.nextInt(passwordArray.length);
-            char temp = passwordArray[i];
-            passwordArray[i] = passwordArray[randomIndex];
-            passwordArray[randomIndex] = temp;
-        }
-        return new String(passwordArray);
+        int number = random.nextInt(100); // Generate a random number between 0 and 99
+        return prefix + number; // Concatenate prefix and random number to form the password
     }
 
     // Method to generate a random phone number

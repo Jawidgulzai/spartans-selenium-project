@@ -30,11 +30,11 @@ public class TekRetailAccount {
         boolean isProfileImageDisplayed = driver.findElement(By.id("profileImage")).isDisplayed();
 
           if (isProfileImageDisplayed){
-              System.out.println("Test passed and account has been successfully created!");
+              System.out.println("Test passed and account has been created successfully!");
           }else {
               System.out.println("Test failed and account has not been created successfully");
           }
 
-          //driver.quit();
+          driver.quit();
     }
 }
