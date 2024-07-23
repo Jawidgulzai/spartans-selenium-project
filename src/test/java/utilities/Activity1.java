@@ -10,17 +10,21 @@ import java.time.Duration;
 
 public class Activity1 {
 
-    public static void main(String[] args) {
+    /*
+    From the page https://retail.tekschool-students.com/selenium/dropdown
+    select your country drop down and select the United States.
+     */
 
+    public static void main(String[] args) throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.get("https://retail.tekschool-students.com/selenium/dropdown");
         driver.manage().window().maximize();
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        Thread.sleep(3000);
 
-        WebElement element = driver.findElement(By.id("countrySelect"));
-        Select contrySelect = new Select(element);
-        contrySelect.selectByVisibleText("United States");
-
+        WebElement countryElement =driver.findElement(By.name("countrySelect"));
+        Select countrySelect = new Select(countryElement);
+        countrySelect.selectByValue("United States");
     }
 }

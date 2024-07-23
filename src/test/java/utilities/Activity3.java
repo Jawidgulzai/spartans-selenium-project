@@ -4,27 +4,34 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
 
 public class Activity3 {
 
+    /*
+   In Retail app under a computer section, choose accessories and then choose
+   keyboard and change quantity to 5.
+   Use implicit wait.
+   Use Explicit wait for all elements.
+   Push to your repository.
+    */
     public static void main(String[] args) {
-
         WebDriver driver = new ChromeDriver();
-        driver.get("https://tek-retail-ui.azurewebsites.net/");
+        driver.get("https://retail.tekschool-students.com/");
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@alt='Accessories']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='products']/div[2]/img"))).click();
 
-        driver.findElement(By.xpath("//p[text()='Accessories']")).click();
-        driver.findElement(By.xpath("((//img[@class='image'])[3]")).submit();
-
-        WebElement element = driver.findElement(By.className("product__select"));
-        Select keyboardElement = new Select(element);
-        keyboardElement.selectByValue("5");
+        WebElement quantityElement  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("product__select")));
+        Select quantitySelect = new Select(quantityElement);
+        quantitySelect.selectByVisibleText("4");
 
     }
 }
