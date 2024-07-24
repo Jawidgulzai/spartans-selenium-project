@@ -26,7 +26,7 @@ public class TableActivity {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Sign In']"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Plans"))).click();
 
-        List<WebElement> priceElements = driver.findElements(By.xpath("//table[@class='price-table']//td"));
+        List<WebElement> priceElements = driver.findElements(By.xpath("//th[text()='Plan Base Price']"));
         for (WebElement element : priceElements) {
             System.out.println(element.getText());
         }
