@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class JavaScriptAlertHandling {
+public class JavaScriptAlertHandlingOption2 {
 
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
@@ -19,16 +19,14 @@ public class JavaScriptAlertHandling {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("alertBtn"))).click();
-        // Option 1)
-        Alert alert = driver.switchTo().alert();
-        String alertText = alert.getText();
-        System.out.println(alertText);
+        // Option2
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("promptBtn"))).click();
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        alert.sendKeys("The alert has been commented");
         alert.accept();
 
-        //Example
-        //When alert accepting user alert
-        alert.sendKeys("Enter some value to the alert");
+        String text = driver.findElement(By.id("message")).getText();
+        System.out.println(text);
 
         driver.quit();
 
