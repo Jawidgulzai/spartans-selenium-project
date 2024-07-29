@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class AlertActivity {
+public class AlertActivity2 {
 
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
@@ -27,7 +27,6 @@ public class AlertActivity {
 
         String text = driver.findElement(By.id("message")).getText();
         System.out.println(text);
-
         driver.quit();
 
     }

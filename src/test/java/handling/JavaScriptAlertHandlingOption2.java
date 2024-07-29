@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class JavaScriptAlertHandlingOption2 {
@@ -24,12 +23,11 @@ public class JavaScriptAlertHandlingOption2 {
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.sendKeys("The alert has been commented");
         alert.accept();
+       // alert.dismiss();
 
         String text = driver.findElement(By.id("message")).getText();
         System.out.println(text);
-
         driver.quit();
-
 
     }
 }

@@ -1,28 +1,27 @@
-package accounts;
+package extra;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.Random;
 
-public class AccountWithAllLocatorsAndMethod {
+public class HeadlessBrowsingActivity {
     public static void main(String[] args) {
 
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(options);
         driver.get("https://tek-retail-ui.azurewebsites.net/");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        FluentWait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(20))
-                .pollingEvery(Duration.ofSeconds(2));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         boolean signInLinkIsEnabled = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Sign in"))).isEnabled();
         if (signInLinkIsEnabled){

@@ -24,7 +24,7 @@ public class Account2 {
         }
 
         driver.findElement(By.partialLinkText("Sign")).click();
-        driver.findElement(By.xpath("(//input[@class='login__input'])[1]")).sendKeys("jawid_g66@gmail.com");
+        driver.findElement(By.xpath("(//input[@class='login__input'])[1]")).sendKeys("jawid_g9@gmail.com");
         driver.findElement(By.xpath("//input[@type='password']")).sendKeys("Jawid123$");
         driver.findElement(By.xpath("//button[text()='Login']")).click();
         String shopByCategory = driver.findElement(By.className("home__categories-title")).getText();

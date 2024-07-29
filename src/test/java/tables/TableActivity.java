@@ -4,32 +4,38 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
 
 public class TableActivity {
+    /*
+      on Insurance app "https://dev.insurance.tekschool-students.com/", login with
+      supervisor / tek_supervisor credentials, and go to a plans section
+      then print all the price values from the table.
+   */
     public static void main(String[] args) {
-
         WebDriver driver = new ChromeDriver();
-        driver.get("https://dev.insurance.tekschool-students.com/");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        try {
+            driver.get("https://dev.insurance.tekschool-students.com/");
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Login"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("username"))).sendKeys("supervisor");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password"))).sendKeys("tek_supervisor");
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Sign In']"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Plans"))).click();
+            driver.findElement(By.linkText("Login")).click();
+            driver.findElement(By.name("username")).sendKeys("supervisor");
+            driver.findElement(By.name("password")).sendKeys("tek_supervisor");
+            driver.findElement(By.xpath("//button[text()='Sign In']")).click();
+            driver.findElement(By.linkText("Plans")).click();
 
-        List<WebElement> priceElements = driver.findElements(By.xpath("//th[text()='Plan Base Price']"));
-        for (WebElement element : priceElements) {
-            System.out.println(element.getText());
+            List<WebElement> pricesElements = driver.findElements(By.xpath("//table/tbody/tr/td[3]"));
+            for(WebElement element  : pricesElements) {
+                System.out.println("The price is = " + element.getText());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            driver.quit();
         }
-        driver.quit();
     }
 }
